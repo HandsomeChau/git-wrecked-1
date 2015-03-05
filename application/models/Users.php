@@ -2,9 +2,9 @@
 
 class Users extends CI_Model
 {
-    var $username;
-    var $hashedPassword;
-    var $id;
+    var $username = "";
+    var $hashedPassword = "";
+    var $id = "";
 
     function __construct()
     {
@@ -27,7 +27,9 @@ class Users extends CI_Model
         $halfHash = crypt($password, md5($password."xio"));
         $fullHashed = md5($halfHash."$halfHash;'/1rnr$password");
 
-        if($fullHashed === $password)
+        $actualPassword = $this->getPassword($username);
+
+        if($fullHashed === $actualPassword)
         {
             //Password is valid
             return true;
@@ -37,6 +39,19 @@ class Users extends CI_Model
             //Password is invalid
             return false;
         }
+    }
+
+    /**
+     * This is public for testing purposes only and should be private in the future and only used inside the Users model
+     *
+     * @param $username
+     *
+     * @return string (hashed password)
+     */
+    public function getPassword($username)
+    {
+        $query = $this->db->query("SELECT hashedPassword FROM users WHERE username LIKE '$username'");
+        return $query->result();
     }
 
 
