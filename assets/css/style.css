@@ -1,0 +1,15 @@
+#body {
+    background-color: lightgrey;
+}
+
+#jumbotron {
+    margin-left: 5%;
+    margin-right: 5%;
+    border: solid gray 2px;
+    border-radius: 15px;
+}
+
+#jumbotron_inner {
+    margin-left: 5%;
+    margin-right: 5%;
+}
