@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( !defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
 
 class user extends CI_Controller
 {
@@ -9,15 +9,15 @@ class user extends CI_Controller
      */
     public function index()
     {
-        $this->load->library('parser');
+        $this->load->library( 'parser' );
 
         $data = array(
             'TITLE' => 'Account'
         );
 
-        $this->parser->parse('templates/headTemplate', $data);
-        $this->load->view('account');
-        $this->load->view('templates/footTemplate');
+        $this->parser->parse( 'templates/headTemplate', $data );
+        $this->load->view( 'account' );
+        $this->load->view( 'templates/footTemplate' );
     }
 
     /**
@@ -26,14 +26,14 @@ class user extends CI_Controller
      */
     public function edit_grades()
     {
-        $this->load->library('parser');
+        $this->load->library( 'parser' );
 
         $data = array(
             'TITLE' => 'edit_grades'
         );
 
-        $this->parser->parse('templates/headTemplate', $data);
-        $this->load->view('edit_grades');
-        $this->load->view('templates/footTemplate');
+        $this->parser->parse( 'templates/headTemplate', $data );
+        $this->load->view( 'edit_grades' );
+        $this->load->view( 'templates/footTemplate' );
     }
 }

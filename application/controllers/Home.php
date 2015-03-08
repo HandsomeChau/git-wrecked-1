@@ -1,9 +1,10 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( !defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
 
 class home extends CI_Controller
 {
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
     }
 
@@ -13,14 +14,14 @@ class home extends CI_Controller
      */
     public function index()
     {
-        $this->load->library('parser');
+        $this->load->library( 'parser' );
 
         $data = array(
             'TITLE' => 'Homepage'
         );
 
-        $this->parser->parse('templates/headTemplate', $data);
-        $this->load->view('home');
-        $this->load->view('templates/footTemplate');
+        $this->parser->parse( 'templates/headTemplate', $data );
+        $this->load->view( 'home' );
+        $this->load->view( 'templates/footTemplate' );
     }
 }

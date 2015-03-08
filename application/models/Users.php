@@ -2,9 +2,9 @@
 
 class Users extends CI_Model
 {
-    var $username = "";
+    var $username       = "";
     var $hashedPassword = "";
-    var $id = "";
+    var $id             = "";
 
     function __construct()
     {
@@ -22,22 +22,19 @@ class Users extends CI_Model
      *
      * @return bool
      */
-    function authenticate($username, $password)
+    function authenticate( $username, $password )
     {
-        $halfHash = crypt($password, md5($password."xio"));
-        $fullHashed = md5($halfHash."$halfHash;'/1rnr$password");
+        $halfHash = crypt( $password, md5( $password . "xio" ) );
+        $fullHashed = md5( $halfHash . "$halfHash;'/1rnr$password" );
 
-        $actualPassword = $this->getPassword($username);
+        $actualPassword = $this->getPassword( $username );
 
-        if($fullHashed === $actualPassword)
-        {
+        if ( $fullHashed === $actualPassword ) {
             //Password is valid
-            return true;
-        }
-        else
-        {
+            return TRUE;
+        } else {
             //Password is invalid
-            return false;
+            return FALSE;
         }
     }
 
@@ -48,9 +45,10 @@ class Users extends CI_Model
      *
      * @return string (hashed password)
      */
-    public function getPassword($username)
+    public function getPassword( $username )
     {
-        $query = $this->db->query("SELECT hashedPassword FROM users WHERE username LIKE '$username'");
+        $query = $this->db->query( "SELECT hashedPassword FROM users WHERE username LIKE '$username'" );
+
         return $query->result();
     }
 

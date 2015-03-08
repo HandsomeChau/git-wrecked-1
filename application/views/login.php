@@ -1,9 +1,11 @@
 <form class="form-signin" action="/account/authenticate" method="post">
     <h2 class="form-signin-heading">Please sign in</h2>
     <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" name="email">
+    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus=""
+           name="email">
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" name="password">
+
     <div class="checkbox">
         <label>
             <input type="checkbox" value="remember-me"> Remember me
