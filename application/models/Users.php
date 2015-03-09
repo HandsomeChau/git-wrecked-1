@@ -13,8 +13,8 @@ class Users extends CI_Model
 
 
     /**
-     * This will authentiacte a user and check if there password is valid with their username
-     * This is an expensive process beucase it contains 3 hashing methods with salting. Making
+     * This will authenticate a user and check if there password is valid with their username
+     * This is an expensive process because it contains 3 hashing methods with salting. Making
      * the password very secure.
      *
      * @param $username

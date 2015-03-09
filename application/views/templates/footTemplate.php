@@ -3,9 +3,8 @@
 
 </body>
 <footer>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="/assets/bootstrap/js/bootstrap.min.js" type="application/javascript"></script>
-    <script src="/assets/js/jquery-1.11.2.js" type="text/javascript"></script>
-    <!--    <script src="/assets/bootstrap/js/npm.js" type="application/javascript"></script>-->
+    <div id="footer" class="span12">
+        Copyright &copy; 2014-2015, <a href="mailto:someone@somewhere.com">Me</a>.
+    </div>
 </footer>
 </html>

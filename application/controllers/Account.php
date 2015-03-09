@@ -1,15 +1,11 @@
 <?php if ( !defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
 
-class account extends CI_Controller
+class Account extends CI_Controller
 {
     function __construct()
     {
         parent::__construct();
     }
-
-//    public function index()
-//    {
-//    }
 
     public function login()
     {
@@ -24,9 +20,11 @@ class account extends CI_Controller
         $this->load->view( 'templates/footTemplate' );
     }
 
-    public function signup()
+    public function signUp()
     {
-        $this->load->library( 'parser' );
+        $this->load->library( array( 'parser', 'form_validation' ) );
+        $this->load->library( 'form_validation' );
+        $this->load->helper( array( 'form', 'url' ) );
 
         $data = array(
             'TITLE' => 'Sign Up'
@@ -35,6 +33,23 @@ class account extends CI_Controller
         $this->parser->parse( 'templates/headTemplate', $data );
         $this->load->view( 'signup' );
         $this->load->view( 'templates/footTemplate' );
+
+        $this->form_validation->set_rules( 'inputEmail', 'Email', 'trim|required|valid_email' );
+        $this->form_validation->set_rules( 'inputPassword', 'Password', 'trim|required',
+            array( 'required' => 'You must provide a %s.' )
+        );
+        $this->form_validation->set_rules( 'inputPassword_repeat', 'Password Confirmation',
+            'trim|required|matches[inputPassword]' );
+
+        if ( $this->form_validation->run() == FALSE ) {
+            echo "Wrong";
+
+        } else {
+            echo "Right";
+            $this->parser->parse( 'templates/headTemplate', $data );
+            $this->load->view( 'user' );
+            $this->load->view( 'templates/footTemplate' );
+        }
     }
 
     public function authenticate()
@@ -42,7 +57,7 @@ class account extends CI_Controller
         echo( "HERE" );
 
         print_r( $_REQUEST );
-        $username = $_REQUEST['username'];
+        $username = $_REQUEST['email'];
         $password = $_REQUEST['password'];
 
         $this->load->model( 'Users' );
@@ -58,6 +73,5 @@ class account extends CI_Controller
 
     public function register()
     {
-
     }
 }
