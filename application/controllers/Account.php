@@ -51,6 +51,9 @@ class Account extends CI_Controller
 
         $this->parser->parse( 'templates/headTemplate', $data );
 
+        /**
+         * Set the rules for form submission
+         */
         $this->form_validation->set_rules( 'inputEmail', 'Email', 'trim|required|valid_email' );
         $this->form_validation->set_rules( 'inputPassword', 'Password', 'trim|required|min_length[8]',
             array( 'required' => 'You must provide a %s.' )
@@ -61,9 +64,23 @@ class Account extends CI_Controller
                    'matches'  => '%s mush match with Password.' ) );
 
         if ( $this->form_validation->run() == FALSE ) {
+            /**
+             * Reload the form if failed to meet the rules
+             */
             $this->load->view( 'signup' );
         } else {
-            $this->load->view( 'account' );
+            /**
+             * Take the user to the success view and insert the registration information to the database
+             */
+            $this->load->view( 'form_success' );
+            $username = $_REQUEST['inputEmail'];
+            $password = $_REQUEST['inputPassword'];
+            $halfHash = crypt( $password, md5( $password . "xio" ) );
+            $fullHashed = md5( $halfHash . "$halfHash;'/1rnr$password" );
+
+            $sql = "INSERT INTO users (username, hashedPassword)
+                  VALUES ( '$username' , '$fullHashed' )";
+            $this->db->query( $sql );
         }
 
         $this->load->view( 'templates/footTemplate' );

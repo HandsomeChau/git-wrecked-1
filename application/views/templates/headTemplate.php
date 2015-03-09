@@ -26,7 +26,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/account/login">Log In</a></li>
-                <li><a href="/account/signup">Sign Up</a></li>
+                <li><a href="/account/register">Sign Up</a></li>
             </ul>
         </div>
     </div>
