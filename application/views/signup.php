@@ -1,4 +1,4 @@
-<form class="form-signup" action="signup" method="post">
+<form class="form-signup" action="register" method="post">
     <h2 class="form-signup-heading">Please sign up</h2>
 
     <label for="inputEmail" class="sr-only">Email address</label>

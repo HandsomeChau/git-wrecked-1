@@ -20,34 +20,6 @@ class Account extends CI_Controller
         $this->load->view( 'templates/footTemplate' );
     }
 
-    public function signUp()
-    {
-        $this->load->library( array( 'parser', 'form_validation' ) );
-        $this->load->library( 'form_validation' );
-        $this->load->helper( array( 'form', 'url' ) );
-
-        $data = array(
-            'TITLE' => 'Sign Up'
-        );
-
-        $this->parser->parse( 'templates/headTemplate', $data );
-
-        $this->form_validation->set_rules( 'inputEmail', 'Email', 'trim|required' );
-        $this->form_validation->set_rules( 'inputPassword', 'Password', 'trim|required',
-            array( 'required' => 'You must provide a %s.' )
-        );
-        $this->form_validation->set_rules( 'inputPassword_repeat', 'Password Confirmation',
-            'trim|required|matches[inputPassword]' );
-
-        if ( $this->form_validation->run() == FALSE ) {
-            $this->load->view( 'signup' );
-        } else {
-            $this->load->view( 'account' );
-        }
-
-        $this->load->view( 'templates/footTemplate' );
-    }
-
     public function authenticate()
     {
         echo( "HERE" );
@@ -69,5 +41,31 @@ class Account extends CI_Controller
 
     public function register()
     {
+        $this->load->library( array( 'parser', 'form_validation' ) );
+        $this->load->library( 'form_validation' );
+        $this->load->helper( array( 'form', 'url' ) );
+
+        $data = array(
+            'TITLE' => 'Sign Up'
+        );
+
+        $this->parser->parse( 'templates/headTemplate', $data );
+
+        $this->form_validation->set_rules( 'inputEmail', 'Email', 'trim|required|valid_email' );
+        $this->form_validation->set_rules( 'inputPassword', 'Password', 'trim|required|min_length[8]',
+            array( 'required' => 'You must provide a %s.' )
+        );
+        $this->form_validation->set_rules( 'inputPassword_repeat', 'Password Confirmation',
+            'trim|required|min_length[8]|matches[inputPassword]',
+            array( 'required' => 'You must provide a %s.',
+                   'matches'  => '%s mush match with Password.' ) );
+
+        if ( $this->form_validation->run() == FALSE ) {
+            $this->load->view( 'signup' );
+        } else {
+            $this->load->view( 'account' );
+        }
+
+        $this->load->view( 'templates/footTemplate' );
     }
 }
