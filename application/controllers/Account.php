@@ -31,10 +31,8 @@ class Account extends CI_Controller
         );
 
         $this->parser->parse( 'templates/headTemplate', $data );
-        $this->load->view( 'signup' );
-        $this->load->view( 'templates/footTemplate' );
 
-        $this->form_validation->set_rules( 'inputEmail', 'Email', 'trim|required|valid_email' );
+        $this->form_validation->set_rules( 'inputEmail', 'Email', 'trim|required' );
         $this->form_validation->set_rules( 'inputPassword', 'Password', 'trim|required',
             array( 'required' => 'You must provide a %s.' )
         );
@@ -42,14 +40,12 @@ class Account extends CI_Controller
             'trim|required|matches[inputPassword]' );
 
         if ( $this->form_validation->run() == FALSE ) {
-            echo "Wrong";
-
+            $this->load->view( 'signup' );
         } else {
-            echo "Right";
-            $this->parser->parse( 'templates/headTemplate', $data );
-            $this->load->view( 'user' );
-            $this->load->view( 'templates/footTemplate' );
+            $this->load->view( 'account' );
         }
+
+        $this->load->view( 'templates/footTemplate' );
     }
 
     public function authenticate()
